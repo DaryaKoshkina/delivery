@@ -34,7 +34,11 @@ public class DeliveryApp {
                     reportStatus(newLocation);
                     break;
                 case 5:
-                    System.out.println("Выберите тип коробки:");
+                    System.out.println("Выберите тип коробки: 1 - Стандартная коробка, 2 - Скоропортящаяся коробка, 3 - Хрупкая коробка");
+                    int typeBox = scanner.nextInt();
+                    scanner.nextLine();
+                    printBox(typeBox);
+                    break;
                 case 0:
                     running = false;
                     break;
@@ -50,7 +54,7 @@ public class DeliveryApp {
         System.out.println("2 — Отправить все посылки");
         System.out.println("3 — Посчитать стоимость доставки");
         System.out.println("4 — Посмотреть статус отслеживаемых посылок");
-        System.out.println("5 - Посмотреть содержимое коробки");
+        System.out.println("5 - Показать содержимое коробки");
         System.out.println("0 — Завершить");
     }
 
@@ -116,6 +120,20 @@ public class DeliveryApp {
     private static void reportStatus(String newLocation){
         for (Trackable trackableParcel : trackableParcels) {
             trackableParcel.reportStatus(newLocation);
+        }
+    }
+
+    private static void printBox(int typeBox) {
+        switch (typeBox) {
+            case 1 :
+                standardBox.getAllParcels();
+                break;
+            case 2 :
+                fragileBox.getAllParcels();
+                break;
+            case 3 :
+                perishableBox.getAllParcels();
+                break;
         }
     }
 }

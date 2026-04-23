@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-
 public class PerishableParcel extends Parcel {
 
     private static final int RATE = 3;
@@ -12,7 +10,7 @@ public class PerishableParcel extends Parcel {
     }
 
     public boolean isExpired(){
-        return (getSendDay() + timeToLive) < LocalDate.now().getDayOfMonth();
+        return (getSendDay() > timeToLive);
     }
 
     int getRate() {

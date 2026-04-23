@@ -22,7 +22,12 @@ public abstract class Parcel {
     abstract int getRate();
 
     public int calculateDeliveryCost() {
-        return weight * getRate();
+        if (weight == 0) {
+            return getRate();
+        } else {
+            return weight * getRate();
+        }
+
     }
 
     public int getSendDay() {
