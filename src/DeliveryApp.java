@@ -7,6 +7,10 @@ public class DeliveryApp {
     private static final Scanner scanner = new Scanner(System.in);
     private static List<Parcel> allParcels = new ArrayList<>();
     private static List<Trackable> trackableParcels = new ArrayList<>();
+    private static ParcelBox<StandardParcel> standardBox = new ParcelBox<>(10000);
+    private static ParcelBox<FragileParcel> fragileBox = new ParcelBox<>(1000);
+    private static ParcelBox<PerishableParcel> perishableBox = new ParcelBox<>(3000);
+
 
     public static void main(String[] args) {
         boolean running = true;
@@ -29,6 +33,8 @@ public class DeliveryApp {
                     String newLocation = scanner.nextLine();
                     reportStatus(newLocation);
                     break;
+                case 5:
+                    System.out.println("Выберите тип коробки:");
                 case 0:
                     running = false;
                     break;
@@ -44,6 +50,7 @@ public class DeliveryApp {
         System.out.println("2 — Отправить все посылки");
         System.out.println("3 — Посчитать стоимость доставки");
         System.out.println("4 — Посмотреть статус отслеживаемых посылок");
+        System.out.println("5 - Посмотреть содержимое коробки");
         System.out.println("0 — Завершить");
     }
 
@@ -69,6 +76,7 @@ public class DeliveryApp {
             case 1 :
                 StandardParcel standardParcel = new StandardParcel(description, weight, deliveryAddress, sendDay);
                 allParcels.add(standardParcel);
+                standardBox.addParcel(standardParcel);
                 break;
             case 2 :
                 System.out.println("Сколько дней хранится Ваша посылка:");
@@ -76,11 +84,13 @@ public class DeliveryApp {
                 scanner.nextLine();
                 PerishableParcel perishableParcel = new PerishableParcel(description, weight, deliveryAddress, sendDay, timeToLive);
                 allParcels.add(perishableParcel);
+                perishableBox.addParcel(perishableParcel);
                 break;
             case 3 :
                 FragileParcel fragileParcel = new FragileParcel(description, weight, deliveryAddress, sendDay);
                 allParcels.add(fragileParcel);
                 trackableParcels.add(fragileParcel);
+                fragileBox.addParcel(fragileParcel);
                 break;
         }
     }
