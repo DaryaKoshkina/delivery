@@ -129,10 +129,10 @@ public class DeliveryApp {
                 standardBox.getAllParcels();
                 break;
             case 2 :
-                fragileBox.getAllParcels();
+                perishableBox.getAllParcels();
                 break;
             case 3 :
-                perishableBox.getAllParcels();
+                fragileBox.getAllParcels();
                 break;
         }
     }
